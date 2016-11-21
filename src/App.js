@@ -1,19 +1,51 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+const X = "X";
+const O = "Y";
+
+class Square extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      value : null
+    }
+  }
+
+  render() {
+    return <div className="square">{ this.state.value }</div>
+  }
+}
+
+class BoardRow extends Component {
+  render() {
+    return (
+      <div className="board-row">
+        <Square />
+        <Square />
+        <Square />
+      </div>
+    );
+  }
+}
+
+class Board extends Component {
+  render() {
+    return (
+      <div className="board">
+        <BoardRow />
+        <BoardRow />
+        <BoardRow />
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Board />
     );
   }
 }
