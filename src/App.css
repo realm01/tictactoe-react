@@ -4,14 +4,29 @@
   border: solid 2px black;
   margin: 0;
   padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .board-row {
   margin: 0;
   padding: 0;
-  display: inline-block;
 }
 
 .board {
+  display: inline-block;
   margin: 2em;
+}
+
+.info {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 2em;
+}
+
+p {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
 }
