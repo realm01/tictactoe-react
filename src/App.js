@@ -46,6 +46,7 @@ class Board extends Component {
 
     this.onClick = this.onClick.bind(this)
     this.onHistoryClick = this.onHistoryClick.bind(this)
+    this.newGame = this.newGame.bind(this)
   }
 
   declaringWinner() {
@@ -74,6 +75,17 @@ class Board extends Component {
       return <Square onClick={() => this.onClick(i)} value={this.state.squares[i]} />
     else
       return <Square value={this.state.squares[i]} />
+  }
+
+  newGame() {
+    this.setState((prevState) => {
+      let newState = prevState
+      newState.squares = Array(9).fill(null)
+      newState.histroy = []
+      newState.nextState = X
+      
+      return newState
+    })
   }
 
   onClick(i) {
@@ -130,7 +142,8 @@ class Board extends Component {
         <Info histroy={this.state.histroy} onClick={this.onHistoryClick}/>
         
         <div>
-          <p>Next Player: {this.state.nextState}</p>
+          <div><a href="#" onClick={this.newGame}>New Game</a></div>
+          <div><p>Next Player: {this.state.nextState}</p></div>
           {winner}
         </div>
       </div>
