@@ -6,7 +6,13 @@ const O = "O";
 
 class Square extends Component {
   render() {
-    return <div className="square" onClick={ () => this.props.onClick() }><p>{ this.props.value }</p></div>
+    return <div className="square" onClick={ () => {
+      if(this.props.onClick === null)
+        return (() => null)()
+      else
+        return this.props.onClick()
+      
+    } }><p>{ this.props.value }</p></div>
   }
 }
 
@@ -63,8 +69,11 @@ class Board extends Component {
     return null;
     }
 
-  renderSquare(i) {
-    return <Square onClick={() => this.onClick(i)} value={this.state.squares[i]} />
+  renderSquare(i, hasWon) {
+    if(!hasWon)
+      return <Square onClick={() => this.onClick(i)} value={this.state.squares[i]} />
+    else
+      return <Square value={this.state.squares[i]} />
   }
 
   onClick(i) {
@@ -95,23 +104,26 @@ class Board extends Component {
   }
 
   render() {
+    const winner = this.declaringWinner()
+    const hasWon = winner === null ? false : true
+    
     return (
       <div>
         <div className="board">
           <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
+            {this.renderSquare(0, hasWon)}
+            {this.renderSquare(1, hasWon)}
+            {this.renderSquare(2, hasWon)}
           </div>
           <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
+            {this.renderSquare(3, hasWon)}
+            {this.renderSquare(4, hasWon)}
+            {this.renderSquare(5, hasWon)}
           </div>
           <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
+            {this.renderSquare(6, hasWon)}
+            {this.renderSquare(7, hasWon)}
+            {this.renderSquare(8, hasWon)}
           </div>
         </div>
 
@@ -119,7 +131,7 @@ class Board extends Component {
         
         <div>
           <p>Next Player: {this.state.nextState}</p>
-          {this.declaringWinner()}
+          {winner}
         </div>
       </div>
     );
