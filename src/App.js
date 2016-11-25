@@ -21,7 +21,7 @@ class Info extends Component {
     var i = 0;
     let items = this.props.histroy.map(x => {
       let t = i
-      const tmp = <li><a onClick={() => this.props.onClick(t)} href="#">Move #{i + 1}: {x.nextState === X ? O : X}</a></li>
+      const tmp = <li key={i}><a onClick={() => this.props.onClick(t)} href="#">Move #{i + 1}: {x.nextState === X ? O : X}</a></li>
       i++
       return tmp
     })
