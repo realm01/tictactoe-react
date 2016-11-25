@@ -15,13 +15,15 @@ class Info extends Component {
     var i = 0;
     let items = this.props.histroy.map(x => {
       let t = i
-      const tmp = <div><a onClick={() => this.props.onClick(t)} href="#">{x.nextState === X ? O : X}</a></div>
+      const tmp = <li><a onClick={() => this.props.onClick(t)} href="#">Move #{i + 1}: {x.nextState === X ? O : X}</a></li>
       i++
       return tmp
     })
     return (
       <div className="info">
-        {items}
+        <ol>
+          {items}
+        </ol>
       </div>
     )
   }
@@ -55,7 +57,7 @@ class Board extends Component {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]
       if (this.state.squares[a] && this.state.squares[a] === this.state.squares[b] && this.state.squares[a] === this.state.squares[c]) {
-        return <p>Winner: {this.state.squares[a]}</p>
+        return <div><p>Winner: {this.state.squares[a]}</p></div>
       }
     }
     return null;
