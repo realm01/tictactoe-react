@@ -12,7 +12,13 @@ class Square extends Component {
 
 class Info extends Component {
   render() {
-    let items = this.props.histroy.map(x => <div><a href="#">{x.nextState === X ? O : X}</a></div>)
+    var i = 0;
+    let items = this.props.histroy.map(x => {
+      let t = i
+      const tmp = <div><a onClick={() => this.props.onClick(t)} href="#">{x.nextState === X ? O : X}</a></div>
+      i++
+      return tmp
+    })
     return (
       <div className="info">
         {items}
@@ -31,6 +37,7 @@ class Board extends Component {
     }
 
     this.onClick = this.onClick.bind(this)
+    this.onHistoryClick = this.onHistoryClick.bind(this)
   }
 
   renderSquare(i) {
@@ -42,12 +49,24 @@ class Board extends Component {
       let newState = prevState;
 
       if(newState.squares[i] === null) {
+        newState.squares = prevState.squares.slice()
         newState.squares[i] = prevState.nextState
+        newState.nextState = newState.nextState === X ? O : X
+        
         newState.histroy.push(newState)
       }
 
-      newState.nextState = newState.nextState === X ? O : X
+      return newState
+    })
+  }
 
+  onHistoryClick(i) {
+    this.setState((prevState) => {
+      let newState = prevState
+      newState.histroy = prevState.histroy.slice(0, i + 1)
+      newState.squares = prevState.histroy.slice(-1).pop().squares.slice()
+      newState.nextState = prevState.histroy.slice(-1).pop().nextState
+      
       return newState
     })
   }
@@ -73,7 +92,7 @@ class Board extends Component {
           </div>
         </div>
 
-        <Info histroy={this.state.histroy}/>
+        <Info histroy={this.state.histroy} onClick={this.onHistoryClick}/>
       </div>
     );
   }
