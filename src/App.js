@@ -74,7 +74,7 @@ class Board extends Component {
     if(!hasWon)
       return <Square onClick={() => this.onClick(i)} value={this.state.squares[i]} />
     else
-      return <Square value={this.state.squares[i]} />
+      return <Square onClick={null} value={this.state.squares[i]} />
   }
 
   newGame() {
