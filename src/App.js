@@ -12,7 +12,7 @@ class Square extends Component {
       else
         return this.props.onClick()
       
-    } }><p>{ this.props.value }</p></div>
+    } }><p className="squareContent">{ this.props.value }</p></div>
   }
 }
 
@@ -64,7 +64,7 @@ class Board extends Component {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]
       if (this.state.squares[a] && this.state.squares[a] === this.state.squares[b] && this.state.squares[a] === this.state.squares[c]) {
-        return <div><p>Winner: {this.state.squares[a]}</p></div>
+        return <div><hr/><p><b>Winner: {this.state.squares[a]}</b></p></div>
       }
     }
     return null;
